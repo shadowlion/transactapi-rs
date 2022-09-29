@@ -43,7 +43,7 @@ impl TransactApiClient {
         let resp = TransactApiClient::post_request::<
             ValidateAbaRoutingNumberPayload,
             ValidateAbaRoutingNumberResponse,
-        >(&self, String::from("validateABARoutingNumber"), payload)
+        >(&self, String::from("validateABARoutingNumber"), &payload)
         .await?;
         Ok(resp)
     }

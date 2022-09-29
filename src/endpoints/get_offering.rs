@@ -50,7 +50,7 @@ impl TransactApiClient {
         let resp = TransactApiClient::post_request::<GetOfferingPayload, GetOfferingResponse>(
             &self,
             String::from("getOffering"),
-            payload,
+            &payload,
         )
         .await?;
         Ok(resp)

@@ -45,7 +45,7 @@ impl TransactApiClient {
     pub async fn post_request<Request: Serialize, Response: de::DeserializeOwned>(
         &self,
         endpoint: String,
-        payload: Request,
+        payload: &Request,
     ) -> Result<Response, reqwest::Error> {
         let url = TransactApiClient::base_url(&self).to_owned() + &endpoint;
         let client = reqwest::Client::new();
