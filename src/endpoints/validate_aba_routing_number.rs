@@ -23,12 +23,14 @@ pub struct ValidateAbaRoutingNumberResponse {
 }
 
 impl TransactApiClient {
+    /// # Validate ABA Routing Number
+    ///
     /// This method is used to validate the routing number for an external account
     /// (via `createExternalAccount`).
     ///
     /// Reference: https://api.norcapsecurities.com/admin_v3/documentation?mid=MjU1
     ///
-    /// # Arguments
+    /// ## Arguments
     ///
     /// - `routing_number` - The routing number to be validated
     pub async fn validate_aba_routing_number(
@@ -40,11 +42,13 @@ impl TransactApiClient {
             developer_api_key: self.developer_api_key.to_owned(),
             routing_number,
         };
+
         let resp = TransactApiClient::post_request::<
             ValidateAbaRoutingNumberPayload,
             ValidateAbaRoutingNumberResponse,
         >(&self, String::from("validateABARoutingNumber"), &payload)
         .await?;
+
         Ok(resp)
     }
 }
