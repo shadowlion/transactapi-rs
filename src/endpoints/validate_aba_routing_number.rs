@@ -35,20 +35,16 @@ impl TransactApiClient {
         &self,
         routing_number: String,
     ) -> Result<ValidateAbaRoutingNumberResponse, reqwest::Error> {
-        let url = TransactApiClient::base_url(&self).to_owned() + "validateABARoutingNumber";
-        let get_offering_payload = ValidateAbaRoutingNumberPayload {
+        let payload = ValidateAbaRoutingNumberPayload {
             client_id: self.client_id.to_owned(),
             developer_api_key: self.developer_api_key.to_owned(),
             routing_number,
         };
-        let client = reqwest::Client::new();
-        let res = client
-            .post(url)
-            .json(&get_offering_payload)
-            .send()
-            .await?
-            .json::<ValidateAbaRoutingNumberResponse>()
-            .await?;
-        Ok(res)
+        let resp = TransactApiClient::post_request::<
+            ValidateAbaRoutingNumberPayload,
+            ValidateAbaRoutingNumberResponse,
+        >(&self, String::from("validateABARoutingNumber"), payload)
+        .await?;
+        Ok(resp)
     }
 }

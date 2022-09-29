@@ -42,20 +42,17 @@ impl TransactApiClient {
         &self,
         offering_id: String,
     ) -> Result<GetOfferingResponse, reqwest::Error> {
-        let url = TransactApiClient::base_url(&self).to_owned() + "getOffering";
-        let get_offering_payload = GetOfferingPayload {
+        let payload = GetOfferingPayload {
             client_id: self.client_id.to_owned(),
             developer_api_key: self.developer_api_key.to_owned(),
             offering_id,
         };
-        let client = reqwest::Client::new();
-        let res = client
-            .post(url)
-            .json(&get_offering_payload)
-            .send()
-            .await?
-            .json::<GetOfferingResponse>()
-            .await?;
-        Ok(res)
+        let resp = TransactApiClient::post_request::<GetOfferingPayload, GetOfferingResponse>(
+            &self,
+            String::from("getOffering"),
+            payload,
+        )
+        .await?;
+        Ok(resp)
     }
 }

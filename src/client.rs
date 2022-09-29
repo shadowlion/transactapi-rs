@@ -1,3 +1,5 @@
+use serde::{de, Serialize};
+
 use crate::TransactApiClient;
 
 impl TransactApiClient {
@@ -31,5 +33,22 @@ impl TransactApiClient {
             "https://{}.norcapsecurities.com/tapiv3/index.php/v3/",
             prefix
         )
+    }
+
+    pub async fn post_request<Request: Serialize, Response: de::DeserializeOwned>(
+        &self,
+        endpoint: String,
+        payload: Request,
+    ) -> Result<Response, reqwest::Error> {
+        let url = TransactApiClient::base_url(&self).to_owned() + &endpoint;
+        let client = reqwest::Client::new();
+        let res = client
+            .post(url)
+            .json(&payload)
+            .send()
+            .await?
+            .json::<Response>()
+            .await?;
+        Ok(res)
     }
 }
