@@ -35,6 +35,13 @@ impl TransactApiClient {
         )
     }
 
+    /// Use reqwest to run a post-method api call.
+    ///
+    /// # Arguments
+    ///
+    /// - `&self` - TransactApiClient instance
+    /// - `endpoint` - string endpoint
+    /// - `payload` - data transfer struct (generic)
     pub async fn post_request<Request: Serialize, Response: de::DeserializeOwned>(
         &self,
         endpoint: String,
