@@ -12,6 +12,13 @@ pub struct TransactApiClient {
 mod endpoints;
 
 impl TransactApiClient {
+    /// Instantiates  newa TransactApi client
+    ///
+    /// # Arguments
+    ///
+    /// - `client_id` - client identifier
+    /// - `developer_api_key` - developer api key
+    /// - `sandbox` - flag for using sandbox api base url
     pub fn new(client_id: String, developer_api_key: String, sandbox: bool) -> TransactApiClient {
         TransactApiClient {
             client_id,
