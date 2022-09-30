@@ -99,7 +99,7 @@ impl TransactApiClient {
         };
 
         let resp = TransactApiClient::post_request::<GetTradePayload, GetTradeResponse>(
-            &self,
+            self,
             String::from("getTrade"),
             &payload,
         )

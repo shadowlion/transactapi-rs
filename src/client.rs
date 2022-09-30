@@ -47,7 +47,7 @@ impl TransactApiClient {
         endpoint: String,
         payload: &Request,
     ) -> Result<Response, reqwest::Error> {
-        let url = TransactApiClient::base_url(&self).to_owned() + &endpoint;
+        let url = TransactApiClient::base_url(self) + &endpoint;
         let client = reqwest::Client::new();
         let res = client
             .post(url)
