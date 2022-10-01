@@ -15,7 +15,7 @@ pub struct GetTradePayload {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct PartyDetails {
+pub struct PartyDetail {
     id: String,
     #[serde(rename = "developerAPIKey")]
     developer_api_key: String,
@@ -71,7 +71,7 @@ pub struct GetTradeResponse {
     #[serde(rename = "statusDesc")]
     pub status_description: String,
     #[serde(rename = "partyDetails")]
-    pub party_details: Vec<PartyDetails>,
+    pub party_details: Vec<PartyDetail>,
 }
 
 impl TransactApiClient {
